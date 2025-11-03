@@ -1,0 +1,25 @@
+
+name: askmydocs
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - fastapi
+      - uvicorn[standard]
+      - transformers>=4.34.0
+      - accelerate
+      - peft
+      - datasets
+      - sentence-transformers
+      - langchain
+      - chromadb
+      - mlflow
+      - prometheus-client
+      - torch
+      - torchvision
+      - tokenizers
+      - python-multipart
+      - streamlit
