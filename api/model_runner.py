@@ -12,9 +12,9 @@ def run_model(query: str):
         # Get Hugging Face token from environment
         hf_token = os.getenv("HF_TOKEN")
 
-        tokenizer = AutoTokenizer.from_pretrained("bigscience/bloomz-3b", token=hf_token)
+        tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3-8B", token=hf_token)
         model = AutoModelForCausalLM.from_pretrained(
-            "bigscience/bloomz-3b",
+            "meta-llama/Llama-3-8B",
             device_map="auto",
             dtype="auto",
             token=hf_token

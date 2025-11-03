@@ -1,6 +1,6 @@
 # AskMyDocs v2
 
-A complete AI-powered document Q&A system built with **FastAPI**, **BLOOMZ**, **Streamlit**, **PEFT/LoRA**, and production-ready monitoring with **Prometheus** and **Grafana**.
+A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA**, **Streamlit**, **PEFT/LoRA**, and production-ready monitoring with **Prometheus** and **Grafana**.
 
 ## 🏗️ Architecture
 
@@ -18,10 +18,10 @@ A complete AI-powered document Q&A system built with **FastAPI**, **BLOOMZ**, **
          │
     ┌────┴────┐
     ▼         ▼
-┌─────────┐ ┌──────────┐
-│ BLOOMZ  │ │Prometheus│ (Port 9090)
-│  Model  │ │ Metrics  │
-└─────────┘ └─────┬────┘
+┌────────┐ ┌──────────┐
+│ LLaMA  │ │Prometheus│ (Port 9090)
+│ Model  │ │ Metrics  │
+└────────┘ └─────┬────┘
                  ▼
            ┌──────────┐
            │ Grafana  │ (Port 3000)
@@ -31,7 +31,7 @@ A complete AI-powered document Q&A system built with **FastAPI**, **BLOOMZ**, **
 
 ## 🚀 Features
 
-- **BLOOMZ 3B Integration**: Instruction-tuned language model for Q&A
+- **LLaMA 3-8B Integration**: State-of-the-art language model for Q&A
 - **FastAPI Backend**: High-performance async API with automatic documentation
 - **Streamlit UI**: Interactive chat interface for querying documents
 - **PEFT/LoRA Support**: Efficient fine-tuning capabilities (scaffold ready)
@@ -44,8 +44,8 @@ A complete AI-powered document Q&A system built with **FastAPI**, **BLOOMZ**, **
 
 - **Conda/Miniconda** or **Anaconda** installed
 - **Docker** and **Docker Compose** (for containerized deployment)
-- **GPU recommended** (4GB+ VRAM) for running BLOOMZ 3B locally
-- **7GB+ free disk space** for model weights
+- **GPU recommended** (8GB+ VRAM) for running LLaMA 3-8B locally
+- **16GB+ free disk space** for model weights
 
 ## 🛠️ Installation
 
@@ -85,13 +85,13 @@ HF_TOKEN=your_actual_hugging_face_token_here
 
 **Get your token from:** https://huggingface.co/settings/tokens
 
-### 4. Download BLOOMZ Model (Optional - Downloads on First Use)
+### 4. Download LLaMA Model (Optional - Downloads on First Use)
 
 ```bash
 make pull-model
 ```
 
-⚠️ **Note**: This downloads ~7GB of model weights. The model will auto-download on first API call if skipped.
+⚠️ **Note**: This downloads ~16GB of model weights. The model will auto-download on first API call if skipped.
 
 ## 🎯 Quick Start
 
@@ -167,7 +167,7 @@ Visit http://localhost:8000/docs for Swagger UI with interactive API testing.
 askmydocs_v2/
 ├── api/                   # FastAPI backend
 │   ├── main.py           # API endpoints & routes
-│   └── model_runner.py   # BLOOMZ model inference
+│   └── model_runner.py   # LLaMA model inference
 ├── ui/                    # Streamlit frontend
 │   └── app.py            # Chat interface
 ├── trainer/               # Fine-tuning scripts
@@ -185,7 +185,7 @@ askmydocs_v2/
 
 ```bash
 make setup        # Create conda environment
-make pull-model   # Download BLOOMZ model
+make pull-model   # Download LLaMA model
 make up           # Start Docker stack
 make ui           # Run Streamlit UI
 make train        # Trigger fine-tuning
@@ -209,12 +209,12 @@ from sentence_transformers import SentenceTransformer
 # Load documents
 # Create embeddings
 # Store in ChromaDB
-# Query with BLOOMZ
+# Query with LLaMA
 ```
 
 ### Fine-Tuning with PEFT
 
-To fine-tune BLOOMZ on your documents:
+To fine-tune LLaMA on your documents:
 
 1. Prepare your training data in `trainer/`
 2. Implement LoRA training in `trainer/fine_tune.py`
@@ -252,8 +252,8 @@ Track experiments at http://localhost:5000
 **Problem**: `Model not available locally` error
 
 **Solutions**:
-1. The BLOOMZ model will auto-download on first use
-2. Check available disk space (need ~7GB)
+1. The LLaMA model will auto-download on first use
+2. Check available disk space (need ~16GB)
 3. For CPU-only mode, modify `model_runner.py` to use `device_map="cpu"`
 
 ### GPU Out of Memory
@@ -265,7 +265,7 @@ from transformers import BitsAndBytesConfig
 
 bnb_config = BitsAndBytesConfig(load_in_4bit=True)
 model = AutoModelForCausalLM.from_pretrained(
-    "bigscience/bloomz-3b",
+    "meta-llama/Llama-3-8B",
     quantization_config=bnb_config,
     device_map="auto"
 )
@@ -294,7 +294,7 @@ make up
 
 ## 🎓 Learning Resources
 
-- [BLOOMZ Model Documentation](https://huggingface.co/bigscience/bloomz-3b)
+- [LLaMA 3 Model Documentation](https://huggingface.co/meta-llama/Llama-3-8B)
 - [PEFT Library](https://github.com/huggingface/peft)
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Streamlit Docs](https://docs.streamlit.io/)
