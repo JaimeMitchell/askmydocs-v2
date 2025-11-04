@@ -1,6 +1,6 @@
 # AskMyDocs v2
 
-A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA 3.2**, **Streamlit**, **PEFT/LoRA**, and production-ready monitoring with **Prometheus** and **Grafana**.
+A complete AI-powered document Q&A system built with **FastAPI**, **Phi-3-mini**, **Streamlit**, **PEFT/LoRA**, and production-ready monitoring with **Prometheus** and **Grafana**.
 
 ## 🏗️ Architecture
 
@@ -18,10 +18,10 @@ A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA 3.2**,
          │
     ┌────┴────┐
     ▼         ▼
-┌────────┐ ┌──────────┐
-│ LLaMA  │ │Prometheus│ (Port 9090)
-│ Model  │ │ Metrics  │
-└────────┘ └─────┬────┘
+┌─────────┐ ┌──────────┐
+│ Phi-3   │ │Prometheus│ (Port 9090)
+│  Mini   │ │ Metrics  │
+└─────────┘ └─────┬────┘
                  ▼
            ┌──────────┐
            │ Grafana  │ (Port 3000)
@@ -31,7 +31,7 @@ A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA 3.2**,
 
 ## 🚀 Features
 
-- **LLaMA 3.2-3B-Instruct Integration**: Instruction-tuned language model for Q&A
+- **Phi-3-mini-4k-instruct Integration**: Microsoft's instruction-tuned language model for Q&A
 - **FastAPI Backend**: High-performance async API with automatic documentation
 - **Streamlit UI**: Interactive chat interface for querying documents
 - **PEFT/LoRA Support**: Efficient fine-tuning capabilities (scaffold ready)
@@ -44,7 +44,7 @@ A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA 3.2**,
 
 - **Conda/Miniconda** or **Anaconda** installed
 - **Docker** and **Docker Compose** (for containerized deployment)
-- **GPU recommended** (4GB+ VRAM) for running LLaMA 3.2-3B-Instruct locally
+- **GPU recommended** (4GB+ VRAM) for running Phi-3-mini-4k-instruct locally
 - **7GB+ free disk space** for model weights
 
 ## 🛠️ Installation
@@ -85,7 +85,7 @@ HF_TOKEN=your_actual_hugging_face_token_here
 
 **Get your token from:** https://huggingface.co/settings/tokens
 
-### 4. Download LLaMA Model (Optional - Downloads on First Use)
+### 4. Download Phi-3-mini Model (Optional - Downloads on First Use)
 
 ```bash
 make pull-model
@@ -167,7 +167,7 @@ Visit http://localhost:8000/docs for Swagger UI with interactive API testing.
 askmydocs_v2/
 ├── api/                   # FastAPI backend
 │   ├── main.py           # API endpoints & routes
-│   └── model_runner.py   # LLaMA model inference
+│   └── model_runner.py   # Phi-3-mini model inference
 ├── ui/                    # Streamlit frontend
 │   └── app.py            # Chat interface
 ├── trainer/               # Fine-tuning scripts
@@ -185,7 +185,7 @@ askmydocs_v2/
 
 ```bash
 make setup        # Create conda environment
-make pull-model   # Download LLaMA model
+make pull-model   # Download Phi-3-mini model
 make up           # Start Docker stack
 make ui           # Run Streamlit UI
 make train        # Trigger fine-tuning
@@ -209,12 +209,12 @@ from sentence_transformers import SentenceTransformer
 # Load documents
 # Create embeddings
 # Store in ChromaDB
-# Query with LLaMA
+# Query with Phi-3-mini
 ```
 
 ### Fine-Tuning with PEFT
 
-To fine-tune LLaMA on your documents:
+To fine-tune Phi-3-mini on your documents:
 
 1. Prepare your training data in `trainer/`
 2. Implement LoRA training in `trainer/fine_tune.py`
@@ -252,7 +252,7 @@ Track experiments at http://localhost:5000
 **Problem**: `Model not available locally` error
 
 **Solutions**:
-1. The LLaMA model will auto-download on first use
+1. The Phi-3-mini model will auto-download on first use
 2. Check available disk space (need ~7GB)
 3. For CPU-only mode, modify `model_runner.py` to use `device_map="cpu"`
 
@@ -265,7 +265,7 @@ from transformers import BitsAndBytesConfig
 
 bnb_config = BitsAndBytesConfig(load_in_4bit=True)
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.2-3B-Instruct",
+    "microsoft/phi-3-mini-4k-instruct",
     quantization_config=bnb_config,
     device_map="auto"
 )
@@ -294,7 +294,7 @@ make up
 
 ## 🎓 Learning Resources
 
-- [LLaMA 3.2 Model Documentation](https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct)
+- [Phi-3-mini Model Documentation](https://huggingface.co/microsoft/phi-3-mini-4k-instruct)
 - [PEFT Library](https://github.com/huggingface/peft)
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Streamlit Docs](https://docs.streamlit.io/)

@@ -9,8 +9,8 @@ setup:
 	@echo "Activate environment with: conda activate $(ENV_NAME)"
 
 pull-model:
-	@echo "Pulling LLaMA model via Hugging Face CLI..."
-	@python -c "import os; from dotenv import load_dotenv; load_dotenv(); from transformers import AutoTokenizer, AutoModelForCausalLM; token=os.getenv('HF_TOKEN'); AutoTokenizer.from_pretrained('meta-llama/Llama-3.2-3B-Instruct', token=token); AutoModelForCausalLM.from_pretrained('meta-llama/Llama-3.2-3B-Instruct', device_map='auto', dtype='auto', token=token)"
+	@echo "Pulling Phi-3-mini model via Hugging Face CLI..."
+	@python -c "import os; from dotenv import load_dotenv; load_dotenv(); from transformers import AutoTokenizer, AutoModelForCausalLM; token=os.getenv('HF_TOKEN'); AutoTokenizer.from_pretrained('microsoft/phi-3-mini-4k-instruct', token=token); AutoModelForCausalLM.from_pretrained('microsoft/phi-3-mini-4k-instruct', device_map='auto', dtype='auto', token=token)"
 
 up:
 	@echo "Starting Docker Compose stack..."
