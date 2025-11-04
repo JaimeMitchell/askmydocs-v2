@@ -1,6 +1,6 @@
 # AskMyDocs v2
 
-A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA**, **Streamlit**, **PEFT/LoRA**, and production-ready monitoring with **Prometheus** and **Grafana**.
+A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA 3.2**, **Streamlit**, **PEFT/LoRA**, and production-ready monitoring with **Prometheus** and **Grafana**.
 
 ## 🏗️ Architecture
 
@@ -31,7 +31,7 @@ A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA**, **S
 
 ## 🚀 Features
 
-- **LLaMA 3-8B Integration**: State-of-the-art language model for Q&A
+- **LLaMA 3.2-3B-Instruct Integration**: Instruction-tuned language model for Q&A
 - **FastAPI Backend**: High-performance async API with automatic documentation
 - **Streamlit UI**: Interactive chat interface for querying documents
 - **PEFT/LoRA Support**: Efficient fine-tuning capabilities (scaffold ready)
@@ -44,8 +44,8 @@ A complete AI-powered document Q&A system built with **FastAPI**, **LLaMA**, **S
 
 - **Conda/Miniconda** or **Anaconda** installed
 - **Docker** and **Docker Compose** (for containerized deployment)
-- **GPU recommended** (8GB+ VRAM) for running LLaMA 3-8B locally
-- **16GB+ free disk space** for model weights
+- **GPU recommended** (4GB+ VRAM) for running LLaMA 3.2-3B-Instruct locally
+- **7GB+ free disk space** for model weights
 
 ## 🛠️ Installation
 
@@ -91,7 +91,7 @@ HF_TOKEN=your_actual_hugging_face_token_here
 make pull-model
 ```
 
-⚠️ **Note**: This downloads ~16GB of model weights. The model will auto-download on first API call if skipped.
+⚠️ **Note**: This downloads ~7GB of model weights. The model will auto-download on first API call if skipped.
 
 ## 🎯 Quick Start
 
@@ -253,7 +253,7 @@ Track experiments at http://localhost:5000
 
 **Solutions**:
 1. The LLaMA model will auto-download on first use
-2. Check available disk space (need ~16GB)
+2. Check available disk space (need ~7GB)
 3. For CPU-only mode, modify `model_runner.py` to use `device_map="cpu"`
 
 ### GPU Out of Memory
@@ -265,7 +265,7 @@ from transformers import BitsAndBytesConfig
 
 bnb_config = BitsAndBytesConfig(load_in_4bit=True)
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3-8B",
+    "meta-llama/Llama-3.2-3B-Instruct",
     quantization_config=bnb_config,
     device_map="auto"
 )
@@ -294,7 +294,7 @@ make up
 
 ## 🎓 Learning Resources
 
-- [LLaMA 3 Model Documentation](https://huggingface.co/meta-llama/Llama-3-8B)
+- [LLaMA 3.2 Model Documentation](https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct)
 - [PEFT Library](https://github.com/huggingface/peft)
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Streamlit Docs](https://docs.streamlit.io/)

@@ -10,7 +10,7 @@ setup:
 
 pull-model:
 	@echo "Pulling LLaMA model via Hugging Face CLI..."
-	@python -c "import os; from dotenv import load_dotenv; load_dotenv(); from transformers import AutoTokenizer, AutoModelForCausalLM; token=os.getenv('HF_TOKEN'); AutoTokenizer.from_pretrained('meta-llama/Llama-3-8B', token=token); AutoModelForCausalLM.from_pretrained('meta-llama/Llama-3-8B', device_map='auto', dtype='auto', token=token)"
+	@python -c "import os; from dotenv import load_dotenv; load_dotenv(); from transformers import AutoTokenizer, AutoModelForCausalLM; token=os.getenv('HF_TOKEN'); AutoTokenizer.from_pretrained('meta-llama/Llama-3.2-3B-Instruct', token=token); AutoModelForCausalLM.from_pretrained('meta-llama/Llama-3.2-3B-Instruct', device_map='auto', dtype='auto', token=token)"
 
 up:
 	@echo "Starting Docker Compose stack..."
