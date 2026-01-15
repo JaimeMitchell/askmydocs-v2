@@ -302,12 +302,12 @@ make up
 
 ## 📝 License
 
-[Add your license here]
+None, I vibe coded this mess. 
 
 ## 🤝 Contributing
 
-[Add contribution guidelines here]
+Various AI tools and my brain on the back-burner. Shame. Shame. Shame...
 
 ## 📧 Support
 
-[Add contact/support information here]
+Nope. You're on your own.
